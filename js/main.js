@@ -5,20 +5,41 @@ const xInitialCoordinate = 13;
 const yInitialCoordinate = 13;
 
 let run;
+let velocity = 1000;
+let snake = [];
 
 startButton.addEventListener('click', startGame);
 stopButton.addEventListener('click', stopGame);
 
-function displaySnake(x, y) {
-    let snakeSquare = document.createElement('div');
-    snakeSquare.classList.add('activeCoordinate');
-    setGridCoordinates(snakeSquare, x, y);
-    gameContainer.appendChild(snakeSquare);
+class SnakeSquare {
+    constructor(squareDiv, x, y) {
+        this.squareDiv = squareDiv;
+        this.x = x;
+        this.y = y;
+    }
 }
 
-function setGridCoordinates(square, x, y) {
-    square.style.gridRow = `${x}`;
-    square.style.gridColumn = `${y}`;
+function createSnakeSquareDiv(x, y) {
+    let snakeSquareDiv = document.createElement('div');
+
+    snakeSquareDiv.classList.add('activeCoordinate');
+    setGridCoordinates(snakeSquareDiv, x, y);
+    gameContainer.appendChild(snakeSquareDiv);
+
+    let snakeSquare = new SnakeSquare(snakeSquareDiv, x, y);
+    snake.push(snakeSquare);
+}
+
+function setGridCoordinates(squareDiv, x, y) {
+    squareDiv.style.gridRow = `${y}`;
+    squareDiv.style.gridColumn = `${x}`;
+}
+
+function moveForward(snake) {
+    for (let i = 0; i < snake.length; i++) {
+        snake[i].y--;
+        setGridCoordinates(snake[i].squareDiv, snake[i].x, snake[i].y);
+    }
 }
 
 function stopGame() {
@@ -27,14 +48,14 @@ function stopGame() {
 
 function startGame() {
     run = true;
-    displaySnake(xInitialCoordinate, yInitialCoordinate);
+    createSnakeSquareDiv(xInitialCoordinate, yInitialCoordinate);
 
     setInterval(() => {
         if(run) {
-            console.log('Running');
+            moveForward(snake);
         } 
         else {
             clearInterval();
         }
-    }, 1000);
+    }, velocity);
 }
