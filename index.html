@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        :root {
+            --black: #000;
+            --white: #fff;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Press Start 2P', cursive;
+        }
+        .pageContent {
+            display: grid;
+            grid-template-rows: 1fr auto 1fr;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--black);
+        }
+        .header {
+            display: grid;
+            place-items: center;
+        }
+        title {
+            display: block;
+            color: var(--white);
+        }
+        .gameContainer {
+            display: grid;
+            grid-template-columns: repeat(25, 1fr);
+            grid-template-rows: repeat(25, 1fr);
+            width: 100%;
+            height: 100vw;
+            border: 1px solid var(--white);
+            box-sizing: border-box;
+        }
+        .activeCoordinate {
+            background-color: var(--white);
+            border: 1px solid var(--black);
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="pageContent">
+        <div class="header">
+            <title>Snake</title>
+            <button class="start">Start</button>
+        </div>
+        <div class="gameContainer">
+            <div class="activeCoordinate"></div>
+        </div>
+        <div class="footer">
+            <button class="stop">Stop</button>
+        </div>
+    </div>
+    <script src="./js/main.js"></script>
+</body>
+</html>
