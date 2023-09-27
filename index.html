@@ -12,6 +12,10 @@
         :root {
             --black: #000;
             --white: #fff;
+            --food: #FF0400;
+        }
+        .inactive {
+            display: none;
         }
         body {
             margin: 0;
@@ -47,6 +51,11 @@
         .activeCoordinate {
             background-color: var(--white);
             border: 1px solid var(--black);
+            box-sizing: border-box;
+        }
+        .foodCoordinate {
+            background-color: var(--food);
+            border: 1px solid var(--white);
             box-sizing: border-box;
         }
     </style>
