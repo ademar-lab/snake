@@ -38,29 +38,22 @@ class Food {
 
 // Motion functions
 function moveUp(snake) {
-    for (let i = 0; i < snake.length; i++) {
-        snake[i].y--;
-        setGridCoordinates(snake[i].squareDiv, snake[i].x, snake[i].y);
-    }
+        snake[0].y--;
+        setGridCoordinates(snake[0].squareDiv, snake[0].x, snake[0].y);
 }
 function moveDown(snake) {
-    for (let i = 0; i < snake.length; i++) {
-        snake[i].y++;
-        setGridCoordinates(snake[i].squareDiv, snake[i].x, snake[i].y);
-    }
+        snake[0].y++;
+        setGridCoordinates(snake[0].squareDiv, snake[0].x, snake[0].y);
 }
 function moveRight(snake) {
-    for (let i = 0; i < snake.length; i++) {
-        snake[i].x++;
-        setGridCoordinates(snake[i].squareDiv, snake[i].x, snake[i].y);
-    }
+        snake[0].x++;
+        setGridCoordinates(snake[0].squareDiv, snake[0].x, snake[0].y);
 }
 function moveLeft(snake) {
-    for (let i = 0; i < snake.length; i++) {
-        snake[i].x--;
-        setGridCoordinates(snake[i].squareDiv, snake[i].x, snake[i].y);
-    }
+        snake[0].x--;
+        setGridCoordinates(snake[0].squareDiv, snake[0].x, snake[0].y);    
 }
+
 
 // Coordinates funtions
 function randomCoordinate() {
@@ -121,6 +114,20 @@ function startGame() {
         if(run) {
             console.log('running');
 
+            // if (snake.length > 1 && snake.length < 3) {
+            //         snake[snake.length-1].x = snake[snake.length-2].x;
+            //         snake[snake.length-1].y = snake[snake.length-2].y;
+            //         setGridCoordinates(snake[snake.length-1].squareDiv, snake[snake.length-1].x, snake[snake.length-1].y)
+            // }
+
+            if (snake.length > 1) {
+                for (let i = snake.length-1; i > 0 ; i--) {
+                    snake[i].x = snake[i-1].x;
+                    snake[i].y = snake[i-1].y;
+                    setGridCoordinates(snake[i].squareDiv, snake[i].x, snake[i].y)
+                }
+            }
+
             switch (direction) {
                 case 'ArrowDown':
                     moveDown(snake);
@@ -143,8 +150,8 @@ function startGame() {
 
             if (snake[0].x == food.x && snake[0].y == food.y){
                 console.log('collision!!!');
-                eatenFoodX = food.x;
-                eatenFoodY = food.y;
+                eatenFoodX = snake[snake.length-1].x;
+                eatenFoodY = snake[snake.length-1].y;
 
                 createNewFood();
                 foodEaten = true;
