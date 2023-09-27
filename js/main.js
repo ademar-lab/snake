@@ -10,6 +10,8 @@ let snake = [];
 let direction;
 let food;
 let foodEaten;
+let xRan = randomCoordinate();
+let yRan = randomCoordinate();
 
 // Default direction
 direction = 'ArrowUp';
@@ -78,14 +80,23 @@ function createSnakeSquareDiv(x, y) {
     snake.push(snakeSquare);
 }
 
-function createFoodSquareDiv(x, y) {
-    let foodSquareDiv = document.createElement('div');
+function createNewFood() {
+    xRan = randomCoordinate();
+    yRan = randomCoordinate();
 
-    foodSquareDiv.classList.add('foodCoordinate');
-    setGridCoordinates(foodSquareDiv, x, y);
-    gameContainer.appendChild(foodSquareDiv);
+    if(food) {
+        setGridCoordinates(food.div, xRan, yRan);
+        food.x = xRan;
+        food.y = yRan;
+    } else {
+        let foodSquareDiv = document.createElement('div');
 
-    food = new Food(foodSquareDiv, x, y);
+        foodSquareDiv.classList.add('foodCoordinate');
+        setGridCoordinates(foodSquareDiv, xRan, yRan);
+        gameContainer.appendChild(foodSquareDiv);
+    
+        food = new Food(foodSquareDiv, xRan, yRan);
+    }
 }
 
 function setGridCoordinates(squareDiv, x, y) {
@@ -98,17 +109,18 @@ function stopGame() {
 }
 
 function startGame() {
+    let eatenFoodX;
+    let eatenFoodY;
+
     run = true;
     startButton.classList.add('inactive');
     createSnakeSquareDiv(xInitialCoordinate, yInitialCoordinate);
-    
-    let ran1 = randomCoordinate();
-    let ran2 = randomCoordinate();
-    createFoodSquareDiv(ran1, ran2);
+    createNewFood();
 
     setInterval(() => {
         if(run) {
             console.log('running');
+
             switch (direction) {
                 case 'ArrowDown':
                     moveDown(snake);
@@ -123,8 +135,18 @@ function startGame() {
                     moveRight(snake);
                     break;
             }
+
+            if (foodEaten) {
+                createSnakeSquareDiv(eatenFoodX, eatenFoodY);
+                foodEaten = false;
+            }
+
             if (snake[0].x == food.x && snake[0].y == food.y){
                 console.log('collision!!!');
+                eatenFoodX = food.x;
+                eatenFoodY = food.y;
+
+                createNewFood();
                 foodEaten = true;
             }
         } 
