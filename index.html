@@ -12,6 +12,7 @@
         :root {
             --black: #000;
             --white: #fff;
+            --traslucidGray: #f0f0f0A0;
             --food: #FF0400;
         }
         .inactive {
@@ -23,6 +24,7 @@
             font-family: 'Press Start 2P', cursive;
         }
         .pageContent {
+            position: relative;
             display: grid;
             grid-template-rows: 1fr auto 1fr;
             width: 100%;
@@ -48,6 +50,55 @@
             border: 1px solid var(--white);
             box-sizing: border-box;
         }
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: auto;
+        }
+        .button {
+            display: flex;
+            place-items: center;
+            justify-content: center;
+            border: 1px solid var(--white);
+            padding: 0 12px;
+        }
+        .button p {
+            color: var(--white);
+        }
+        .mobileArrows {
+            bottom: 20px;
+            right: 20px;
+            display: grid;
+            width: 120px;
+            height: 120px;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+        .mobileArrows .button {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+        }
+        .mobileArrows .button p {
+            font-size: 7px;
+        }
+        .mobileArrows div:nth-child(1) {
+            grid-row: 1;
+            grid-column: 2;
+        }
+        .mobileArrows div:nth-child(2) {
+            grid-row: 2;
+            grid-column: 3;
+        }
+        .mobileArrows div:nth-child(3) {
+            grid-row: 3;
+            grid-column: 2;
+        }
+        .mobileArrows div:nth-child(4) {
+            grid-row: 2;
+            grid-column: 1;
+        }
         .activeCoordinate {
             background-color: var(--white);
             border: 1px solid var(--black);
@@ -69,7 +120,23 @@
         <div class="gameContainer">
         </div>
         <div class="footer">
-            <button class="stop">Stop</button>
+            <div class="button stop">
+                <p>Pause</p>
+            </div>
+            <div class="mobileArrows">
+                <div class="up button">
+                    <p>Up</p>
+                </div>
+                <div class="right button">
+                    <p>Right</p>
+                </div>
+                <div class="down button">
+                    <p>Down</p>
+                </div>
+                <div class="left button">
+                    <p>Left</p>
+                </div>
+            </div>
         </div>
     </div>
     <script src="./js/main.js"></script>
