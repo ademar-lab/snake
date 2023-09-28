@@ -1,4 +1,5 @@
 const stopButton = document.querySelector('.stop');
+const pauseParagraph = document.querySelector('.pause')
 const startButton = document.querySelector('.startButton');
 const startMenu = document.querySelector('.startMenu');
 const runningContent = document.querySelector('.runningContent');
@@ -108,7 +109,13 @@ function setGridCoordinates(squareDiv, x, y) {
 }
 
 function stopGame() {
-    run = false;
+    if(run) {
+        run = false;
+        pauseParagraph.textContent = 'Play';
+    } else {
+        run = true;
+        pauseParagraph.textContent = 'Pause';
+    }
 }
 
 function startGame() {
