@@ -1,11 +1,13 @@
 const stopButton = document.querySelector('.stop');
-const startButton = document.querySelector('.start');
-const gameContainer = document.querySelector('.gameContainer')
+const startButton = document.querySelector('.startButton');
+const startMenu = document.querySelector('.startMenu');
+const runningContent = document.querySelector('.runningContent');
+const gameContainer = document.querySelector('.gameContainer');
 const xInitialCoordinate = 13;
 const yInitialCoordinate = 13;
 
 let run;
-let velocity = 300;
+let velocity = 180;
 let snake = [];
 let direction;
 let food;
@@ -106,13 +108,16 @@ function startGame() {
     let eatenFoodY;
 
     run = true;
-    startButton.classList.add('inactive');
+    startMenu.classList.add('inactive');
+    runningContent.classList.remove('inactive');
+
     createSnakeSquareDiv(xInitialCoordinate, yInitialCoordinate);
     createNewFood();
 
     setInterval(() => {
         if(run) {
             console.log('running');
+            startMenu.classList.add('inactive');
 
             // if (snake.length > 1 && snake.length < 3) {
             //         snake[snake.length-1].x = snake[snake.length-2].x;
