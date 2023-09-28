@@ -3,6 +3,10 @@ const startButton = document.querySelector('.startButton');
 const startMenu = document.querySelector('.startMenu');
 const runningContent = document.querySelector('.runningContent');
 const gameContainer = document.querySelector('.gameContainer');
+const upButton = document.querySelector('.up');
+const downButton = document.querySelector('.down');
+const leftButton = document.querySelector('.left');
+const rightButton = document.querySelector('.right');
 const xInitialCoordinate = 13;
 const yInitialCoordinate = 13;
 
@@ -21,6 +25,10 @@ direction = 'ArrowUp';
 startButton.addEventListener('click', startGame);
 stopButton.addEventListener('click', stopGame);
 window.addEventListener("keydown", (e) => {direction = e.key });
+upButton.addEventListener("click", () => {direction = 'ArrowUp'});
+downButton.addEventListener("click", () => {direction = 'ArrowDown'});
+leftButton.addEventListener("click", () => {direction = 'ArrowLeft'});
+rightButton.addEventListener("click", () => {direction = 'ArrowRight'});
 
 class SnakeSquare {
     constructor(squareDiv, x, y) {
