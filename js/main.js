@@ -25,7 +25,13 @@ direction = 'ArrowUp';
 
 startButton.addEventListener('click', startGame);
 stopButton.addEventListener('click', stopGame);
-window.addEventListener("keydown", (e) => {direction = e.key });
+window.addEventListener("keydown", (e) => {
+    if (e.key == ' ') {
+        stopGame();
+    } else {
+        direction = e.key;
+    }
+});
 upButton.addEventListener("click", () => {direction = 'ArrowUp'});
 downButton.addEventListener("click", () => {direction = 'ArrowDown'});
 leftButton.addEventListener("click", () => {direction = 'ArrowLeft'});
@@ -160,6 +166,8 @@ function startGame() {
                     break;
                 case 'ArrowRight':
                     moveRight(snake);
+                    break;
+                default :
                     break;
             }
 
